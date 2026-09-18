@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -10,7 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRole } from "@/context/RoleContext";
 import Button from "@/components/ui/Button";
 
-export default function OrganizerLoginPage() {
+function OrganizerLoginContent() {
   const router = useRouter();
   const { logIn, isAuthenticated, loading } = useAuth();
   const { setRole } = useRole();
@@ -166,4 +166,8 @@ export default function OrganizerLoginPage() {
       </div>
     </div>
   );
+}
+
+export default function OrganizerLoginPage() {
+  return <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="h-8 w-8 rounded-full border-2 border-brand-500 border-t-transparent animate-spin" /></div>}><OrganizerLoginContent /></Suspense>;
 }

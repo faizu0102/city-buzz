@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Zap, Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 
-export default function SignupPage() {
+function SignupContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { signUp, isAuthenticated, loading } = useAuth();
@@ -213,4 +213,8 @@ export default function SignupPage() {
       </div>
     </div>
   );
+}
+
+export default function SignupPage() {
+  return <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="h-8 w-8 rounded-full border-2 border-brand-500 border-t-transparent animate-spin" /></div>}><SignupContent /></Suspense>;
 }

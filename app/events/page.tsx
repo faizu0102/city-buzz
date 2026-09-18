@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Calendar, SlidersHorizontal } from "lucide-react";
 import { Section } from "@/components/ui/Section";
@@ -27,7 +27,7 @@ function getParam(params: URLSearchParams, key: string, fallback: string): strin
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function EventsPage() {
+function EventsContent() {
   const searchParams = useSearchParams();
 
   // Live organizer events from Firestore
@@ -202,4 +202,8 @@ export default function EventsPage() {
       </Section>
     </>
   );
+}
+
+export default function EventsPage() {
+  return <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="h-8 w-8 rounded-full border-2 border-brand-500 border-t-transparent animate-spin" /></div>}><EventsContent /></Suspense>;
 }

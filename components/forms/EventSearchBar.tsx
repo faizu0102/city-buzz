@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { categories } from "@/lib/data/categories";
 
-export default function EventSearchBar() {
+function EventSearchBarContent() {
   const router       = useRouter();
   const searchParams = useSearchParams();
 
@@ -107,4 +107,8 @@ export default function EventSearchBar() {
       </div>
     </div>
   );
+}
+
+export default function EventSearchBar() {
+  return <Suspense fallback={<div className="h-10 bg-surface-secondary rounded-2xl animate-pulse" />}><EventSearchBarContent /></Suspense>;
 }
