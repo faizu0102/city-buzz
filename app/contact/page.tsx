@@ -13,16 +13,16 @@ const contactDetails = [
   {
     icon: Mail,
     title: "Email Us",
-    detail: "hello@citybuzz.in",
+    detail: "faizaanali0102@gmail.com",
     sub: "We reply within 24 hours",
-    href: "mailto:hello@citybuzz.in",
+    href: "mailto:faizaanali0102@gmail.com",
   },
   {
     icon: Phone,
     title: "Call Us",
-    detail: "+91 90000 00000",
+    detail: "+91 94400 74064",
     sub: "Mon–Sat, 10am–6pm IST",
-    href: "tel:+919000000000",
+    href: "tel:+919440074064",
   },
   {
     icon: MapPin,

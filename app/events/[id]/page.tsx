@@ -14,6 +14,7 @@ import {
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import EventCard from "@/components/ui/EventCard";
+import RegisterButton from "@/components/events/RegisterButton";
 
 // ─── Static params ────────────────────────────────────────────────────────────
 
@@ -314,24 +315,16 @@ export default async function EventDetailPage(
                 </Badge>
 
                 {/* Registration CTA */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-center gap-2 bg-surface-secondary rounded-xl p-3 border border-border">
-                    <Clock className="h-4 w-4 text-ink-muted shrink-0" />
-                    <p className="text-xs text-center text-ink-muted font-medium">
-                      Registration coming soon — check back shortly
-                    </p>
-                  </div>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    href="/organizer"
-                    className="opacity-75 pointer-events-none"
-                    aria-disabled="true"
-                  >
-                    Register for this Event
-                  </Button>
-                </div>
+                <RegisterButton
+                  event={{
+                    id: event.id,
+                    title: event.title,
+                    date: formatDate(event.date),
+                    venue: event.venue,
+                    isFree: event.isFree,
+                    registrationStatus: event.registrationStatus,
+                  }}
+                />
 
                 {/* Free note */}
                 {event.isFree && (

@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
+"use client";
+
+import React from "react";
 import {
   Megaphone, CheckCircle2, BarChart2, Users, Bell,
-  Globe, ArrowRight, Star, Send,
+  Globe, ArrowRight, Star, Send, LogIn, UserPlus,
 } from "lucide-react";
 import OrganizerEnquiryForm from "@/components/forms/OrganizerEnquiryForm";
 import { Section } from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/context/AuthContext";
+import { useRole } from "@/context/RoleContext";
 
-export const metadata: Metadata = {
-  title: "List Your Event | CityBuzz Organizers",
-  description:
-    "Publish your event on CityBuzz and reach thousands of people across Nizamabad.",
-};
+// ─── Static data ──────────────────────────────────────────────────────────────
 
 const features = [
   {
@@ -47,13 +47,20 @@ const features = [
 ];
 
 const steps = [
-  { n: "01", title: "Create an Account", desc: "Sign up as an organizer — it takes under a minute." },
+  { n: "01", title: "Create an Account", desc: "Sign up as an organiser — select your organisation type and fill in basic details." },
   { n: "02", title: "Fill Event Details", desc: "Title, description, date, time, location, category and an event image." },
-  { n: "03", title: "Submit for Review", desc: "Our team reviews and publishes your event within 24 hours." },
-  { n: "04", title: "Go Live", desc: "Your event is live on CityBuzz and visible to all of Nizamabad." },
+  { n: "03", title: "Publish Instantly",  desc: "Your event goes live immediately on CityBuzz and is visible to all of Nizamabad." },
+  { n: "04", title: "Track & Manage",     desc: "Monitor registrations and manage your events from your organiser dashboard." },
 ];
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function OrganizerPage() {
+  const { isAuthenticated, loading } = useAuth();
+  const { isOrganizer } = useRole();
+
+  const isOrgLoggedIn = isAuthenticated && isOrganizer;
+
   return (
     <>
       {/* ── Hero ── */}
@@ -89,30 +96,73 @@ export default function OrganizerPage() {
             From cultural programs to sports meets — we help you fill every seat.
           </p>
 
-          <div className="flex flex-wrap gap-3">
-            <Button
-              variant="primary"
-              size="xl"
-              href="/signup"
-              rightIcon={<ArrowRight className="h-4 w-4" />}
-            >
-              Get Started Free
-            </Button>
-            <Button
-              variant="outline"
-              size="xl"
-              href="/contact"
-              className="border-white/20 text-white hover:bg-white/10 hover:border-white/40"
-            >
-              Contact Us First
-            </Button>
-          </div>
+          {/* ── Auth-aware CTA buttons ── */}
+          {!loading && (
+            <div className="flex flex-wrap gap-3">
+              {isOrgLoggedIn ? (
+                /* Already logged in as organizer */
+                <>
+                  <Button
+                    variant="primary" size="xl"
+                    href="/organizer/create"
+                    rightIcon={<ArrowRight className="h-4 w-4" />}
+                  >
+                    Create New Event
+                  </Button>
+                  <Button
+                    variant="outline" size="xl"
+                    href="/organizer/dashboard"
+                    className="border-white/20 text-white hover:bg-white/10 hover:border-white/40"
+                  >
+                    Go to Dashboard
+                  </Button>
+                </>
+              ) : isAuthenticated ? (
+                /* Logged in as participant — offer switch */
+                <>
+                  <Button
+                    variant="primary" size="xl"
+                    href="/organizer/create"
+                    rightIcon={<ArrowRight className="h-4 w-4" />}
+                  >
+                    Create an Event
+                  </Button>
+                  <Button
+                    variant="outline" size="xl"
+                    href="/organizer/dashboard"
+                    className="border-white/20 text-white hover:bg-white/10 hover:border-white/40"
+                  >
+                    My Dashboard
+                  </Button>
+                </>
+              ) : (
+                /* Not logged in — primary CTA is signup */
+                <>
+                  <Button
+                    variant="primary" size="xl"
+                    href="/organizer/signup"
+                    rightIcon={<UserPlus className="h-4 w-4" />}
+                  >
+                    Register as Organiser
+                  </Button>
+                  <Button
+                    variant="outline" size="xl"
+                    href="/organizer/login"
+                    className="border-white/20 text-white hover:bg-white/10 hover:border-white/40"
+                    rightIcon={<LogIn className="h-4 w-4" />}
+                  >
+                    Sign In
+                  </Button>
+                </>
+              )}
+            </div>
+          )}
 
           {/* Trust signals */}
           <div className="flex flex-wrap gap-5 mt-10 pt-8 border-t border-white/10">
             {[
               "Free event listing",
-              "Listed within 24 hours",
+              "Publish instantly",
               "City-wide visibility",
             ].map((item) => (
               <span key={item} className="flex items-center gap-2 text-sm text-white/60">
@@ -123,6 +173,31 @@ export default function OrganizerPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Auth gate banner (shown only when not logged in) ── */}
+      {!loading && !isAuthenticated && (
+        <div className="bg-brand-50 border-b border-brand-100">
+          <div className="cb-container py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 rounded-xl bg-brand-100 flex items-center justify-center shrink-0">
+                <Megaphone className="h-4.5 w-4.5 text-brand-500" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-ink">Ready to list your event?</p>
+                <p className="text-xs text-ink-muted">Create a free account — takes under 2 minutes.</p>
+              </div>
+            </div>
+            <div className="flex gap-2 shrink-0">
+              <Button variant="outline" size="sm" href="/organizer/login">
+                Sign In
+              </Button>
+              <Button variant="primary" size="sm" href="/organizer/signup">
+                Register Free
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Features ── */}
       <Section className="bg-white">
@@ -169,19 +244,54 @@ export default function OrganizerPage() {
           ))}
         </div>
 
-        {/* Enquiry form */}
-        <div className="bg-white rounded-3xl border border-border shadow-card-lg p-6 md:p-8 max-w-2xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-10 w-10 rounded-xl bg-brand-100 flex items-center justify-center">
-              <Send className="h-5 w-5 text-brand-500" />
-            </div>
-            <div>
-              <h3 className="font-bold text-ink text-heading-xl">Quick Event Enquiry</h3>
-              <p className="text-xs text-ink-muted">We&apos;ll reach out within 24 hours.</p>
-            </div>
-          </div>
-
-          <OrganizerEnquiryForm />
+        {/* ── Bottom CTA — auth aware ── */}
+        <div className="bg-white rounded-3xl border border-border shadow-card-lg p-8 text-center max-w-lg mx-auto">
+          {!loading && isOrgLoggedIn ? (
+            <>
+              <h3 className="font-bold text-ink text-heading-xl mb-2">Ready to create your next event?</h3>
+              <p className="text-body-sm text-ink-muted mb-5">Head to the dashboard or jump straight into creating.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button variant="primary" size="lg" href="/organizer/create" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                  Create Event
+                </Button>
+                <Button variant="outline" size="lg" href="/organizer/dashboard">
+                  My Dashboard
+                </Button>
+              </div>
+            </>
+          ) : !loading && !isAuthenticated ? (
+            <>
+              <div className="h-12 w-12 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-4">
+                <UserPlus className="h-6 w-6 text-brand-500" />
+              </div>
+              <h3 className="font-bold text-ink text-heading-xl mb-2">Get Started Free</h3>
+              <p className="text-body-sm text-ink-muted mb-5">
+                Register your organisation and publish your first event in minutes.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button variant="primary" size="lg" href="/organizer/signup" rightIcon={<ArrowRight className="h-4 w-4" />}>
+                  Register as Organiser
+                </Button>
+                <Button variant="outline" size="lg" href="/organizer/login">
+                  Sign In
+                </Button>
+              </div>
+            </>
+          ) : (
+            /* Participant logged in — quick enquiry form fallback */
+            <>
+              <div className="flex items-center gap-3 mb-6 text-left">
+                <div className="h-10 w-10 rounded-xl bg-brand-100 flex items-center justify-center">
+                  <Send className="h-5 w-5 text-brand-500" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-ink text-heading-xl">Quick Event Enquiry</h3>
+                  <p className="text-xs text-ink-muted">We&apos;ll reach out within 24 hours.</p>
+                </div>
+              </div>
+              <OrganizerEnquiryForm />
+            </>
+          )}
         </div>
       </Section>
     </>

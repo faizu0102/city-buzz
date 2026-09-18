@@ -9,7 +9,7 @@ import type { Event } from "@/lib/types";
 
 export const events: Event[] = [
 
-  // ── TODAY (2026-09-17) ────────────────────────────────────────────────────
+  // ── TODAY (2026-09-18) ────────────────────────────────────────────────────
 
   {
     id: "evt-001",
@@ -27,7 +27,7 @@ export const events: Event[] = [
       "Free entry — all welcome",
     ],
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
-    date: "2026-09-17",
+    date: "2026-09-18",
     startTime: "18:30",
     endTime: "21:00",
     venue: "Town Hall Auditorium",
@@ -66,7 +66,7 @@ export const events: Event[] = [
       "Certificates for all participants",
     ],
     image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=800&q=80",
-    date: "2026-09-17",
+    date: "2026-09-18",
     startTime: "09:00",
     endTime: "18:00",
     venue: "Nizamabad Sports Complex",
@@ -105,7 +105,7 @@ export const events: Event[] = [
       "Laptop required",
     ],
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-    date: "2026-09-17",
+    date: "2026-09-18",
     startTime: "10:00",
     endTime: "16:00",
     venue: "NIT Nizamabad — CSE Seminar Hall",
@@ -144,7 +144,7 @@ export const events: Event[] = [
       "Children's activities",
     ],
     image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80",
-    date: "2026-09-17",
+    date: "2026-09-18",
     startTime: "17:00",
     endTime: "22:00",
     venue: "Subhash Chowk Ground",
@@ -167,7 +167,85 @@ export const events: Event[] = [
     createdAt: "2026-09-05",
   },
 
-  // ── UPCOMING ──────────────────────────────────────────────────────────────
+  {
+    id: "evt-004b",
+    slug: "nizamabad-morning-walk-fitness-2026",
+    title: "Community Morning Walk & Fitness Drive",
+    category: "Community",
+    description:
+      "Start your Friday right! Join hundreds of Nizamabad residents for a community morning walk along the scenic Lake Front. All ages welcome — bring your family.",
+    longDescription:
+      "Every Friday morning, CityBuzz and the Nizamabad Walkers Club organize a community fitness walk along the picturesque Nizamabad Lake Front. The 3 km route is flat and easy for all fitness levels. Walking groups for seniors, families with children, and fitness enthusiasts. Refreshments and a quick stretching session included at the finish point.",
+    highlights: [
+      "3 km scenic Lake Front route",
+      "Groups for all fitness levels",
+      "Stretching session at finish",
+      "Free — families welcome",
+    ],
+    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+    date: "2026-09-18",
+    startTime: "06:30",
+    endTime: "08:30",
+    venue: "Nizamabad Lake Front",
+    address: "Lake Front Road, Nizamabad",
+    city: "Nizamabad",
+    locality: "Lake Front",
+    latitude: 18.6680,
+    longitude: 78.0880,
+    organizer: "Nizamabad Walkers Club (Demo)",
+    isFeatured: false,
+    isVerified: true,
+    isFree: true,
+    isToday: true,
+    registrationStatus: "Free",
+    registrationRequired: false,
+    capacity: 300,
+    registrationCount: 145,
+    attendeeCount: 145,
+    tags: ["fitness", "walking", "community", "health"],
+    createdAt: "2026-09-10",
+  },
+
+  {
+    id: "evt-004c",
+    slug: "telangana-quiz-competition-2026",
+    title: "Telangana General Knowledge Quiz — Open Round",
+    category: "Competition",
+    description:
+      "Test your knowledge of Telangana history, culture, geography and current affairs. Open to all age groups. Cash prizes for winners. Walk-in registrations accepted today.",
+    longDescription:
+      "An open general knowledge quiz competition focused on Telangana — its history, art, culture, geography, politics and current affairs. Conducted in Telugu and English. Individual and team (2-person) categories. Certificates for all participants; cash prizes of ₹5,000, ₹3,000 and ₹1,000 for top 3. On-the-spot registration available at the venue.",
+    highlights: [
+      "Telangana-focused questions",
+      "Individual and team categories",
+      "Cash prizes up to ₹5,000",
+      "Walk-in registration at venue",
+    ],
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+    date: "2026-09-18",
+    startTime: "11:00",
+    endTime: "14:00",
+    venue: "Nizamabad Public Library Hall",
+    address: "Library Road, Nizamabad",
+    city: "Nizamabad",
+    locality: "Station Road",
+    latitude: 18.6715,
+    longitude: 78.0945,
+    organizer: "Telangana Cultural Forum Nizamabad (Demo)",
+    isFeatured: true,
+    isVerified: true,
+    isFree: false,
+    isToday: true,
+    registrationStatus: "Open",
+    registrationRequired: false,
+    capacity: 120,
+    registrationCount: 78,
+    attendeeCount: 78,
+    tags: ["quiz", "telangana", "competition", "knowledge"],
+    createdAt: "2026-09-12",
+  },
+
+  // ── UPCOMING ───────────────────────────────────────────────────────────────
 
   {
     id: "evt-005",

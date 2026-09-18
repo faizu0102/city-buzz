@@ -136,13 +136,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json<ChatApiResponse>(
         {
           reply:
-            "CityBuzz AI is ready to help, but requires a `GEMINI_API_KEY` to be configured in `.env.local`. Get your free API key at https://aistudio.google.com/.",
+            "CityBuzz AI needs a valid **Gemini API key** to work.\n\n**How to fix:**\n1. Go to [aistudio.google.com](https://aistudio.google.com/) and sign in\n2. Click **Get API key** → Create API key\n3. Copy the key (it starts with `AIzaSy...`)\n4. Open `.env.local` and replace `GEMINI_API_KEY=` with your new key\n5. Restart the dev server (`npm run dev`)",
           events: [],
           suggestedQuestions: ["What's happening today?", "Events this weekend"],
           status: "error",
           error: "MISSING_API_KEY",
         },
-        { status: 200 } // Return 200 with friendly message in UI so user isn't shown a broken red error screen
+        { status: 200 }
       );
     }
 

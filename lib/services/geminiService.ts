@@ -52,7 +52,7 @@ Respond with a JSON object adhering to this structure:
 
 function getClient(): GoogleGenAI {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
-  if (!apiKey || apiKey === "your_gemini_api_key_here" || apiKey === "your_key_here") {
+  if (!apiKey || apiKey === "your_gemini_api_key_here" || apiKey === "PASTE_YOUR_AISTUDIO_KEY_HERE") {
     throw new Error("MISSING_API_KEY");
   }
   return new GoogleGenAI({ apiKey });

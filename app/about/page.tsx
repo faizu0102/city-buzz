@@ -173,6 +173,82 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* ── Team ── */}
+      <Section className="bg-white">
+        <div className="text-center mb-12">
+          <p className="text-label-md uppercase tracking-widest text-brand-500 mb-2">The People Behind It</p>
+          <h2 className="text-display-sm font-bold text-ink">Meet the Team</h2>
+          <p className="text-body-lg text-ink-muted mt-2 max-w-xl mx-auto">
+            A small, passionate team from Nizamabad building the city&apos;s digital pulse.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-4xl mx-auto">
+          {[
+            {
+              name: "Mohammed Faizaan Ali Khan",
+              role: "Senior Developer",
+              initials: "MF",
+              color: "bg-brand-500",
+              email: "faizaanali0102@gmail.com",
+              phone: "+91 94400 74064",
+            },
+            {
+              name: "Shaik Cezan",
+              role: "Junior Developer",
+              initials: "SC",
+              color: "bg-accent-500",
+              email: null,
+              phone: null,
+            },
+            {
+              name: "Shaik Sahil",
+              role: "Junior Developer",
+              initials: "SS",
+              color: "bg-teal-500",
+              email: null,
+              phone: null,
+            },
+            {
+              name: "Salman Bi Salam",
+              role: "Junior Developer",
+              initials: "SB",
+              color: "bg-purple-500",
+              email: null,
+              phone: null,
+            },
+          ].map((member) => (
+            <div
+              key={member.name}
+              className="bg-surface-secondary border border-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 hover:shadow-card-hover transition-all duration-200"
+            >
+              {/* Avatar */}
+              <div className={`h-16 w-16 rounded-2xl ${member.color} flex items-center justify-center text-white text-xl font-black shadow-sm`}>
+                {member.initials}
+              </div>
+
+              <div>
+                <p className="font-bold text-ink text-heading-md leading-snug">{member.name}</p>
+                <p className="text-xs font-semibold text-brand-500 uppercase tracking-wide mt-0.5">{member.role}</p>
+              </div>
+
+              {member.email && (
+                <div className="flex flex-col gap-1 w-full text-xs text-ink-muted border-t border-border pt-3">
+                  <a href={`mailto:${member.email}`} className="hover:text-brand-500 transition-colors truncate">
+                    ✉ {member.email}
+                  </a>
+                  {member.phone && (
+                    <a href={`tel:${member.phone.replace(/\s/g, "")}`} className="hover:text-brand-500 transition-colors">
+                      📞 {member.phone}
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* ── Contact CTA ── */}
       <Section className="bg-white" narrow>
         <div className="text-center">
